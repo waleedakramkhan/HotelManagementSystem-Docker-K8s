@@ -9,14 +9,14 @@ The implementation makes use of the following technologies:
 *	Shell, for automating the creation and deployment of the web application.
 *	ReactJS, used for handling the web application’s View layer and UI. 
  
-The project structure is as donated by the diagrams below;
+### The project structure is as donated by the diagrams below;
 ![Cloud](https://user-images.githubusercontent.com/85986662/122259218-5f832a00-ceeb-11eb-8350-8826a6b13623.png)
 
-The database structure is as donated the ER diagram below;
+### The database structure is as donated the ER diagram below;
 
 ![ER](https://user-images.githubusercontent.com/85986662/122259326-80e41600-ceeb-11eb-8e71-9a5c6291d896.png)
 
-A few screenshots of the running system:
+### A few screenshots of the running system:
 
 ![295](https://user-images.githubusercontent.com/85986662/122261627-07015c00-ceee-11eb-90a6-9c1eed4451c3.PNG)
 
