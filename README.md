@@ -1,5 +1,5 @@
 # HotelManagementSystem-Docker-K8s
-The proposed website is, in essence, a hotel management system. Tourism is an absolutely booming industry, and we plan to capitalize on that popularity and make the entire accommodation arrangement process of vacations and tours easier. The management system will serve as a database of hotels, one that a user can use to book hotels and rooms online and in general, plan their stays at hotels. The functionalities include booking rooms, checking in and checking out and dropping reviews after styas at various hotels. The main objective of the project was DevOps.
+The project this repository contains is, in essence, a hotel management system. Tourism is an absolutely booming industry, and we plan to capitalize on that popularity and make the entire accommodation arrangement process of vacations and tours easier. The management system will serve as a database of hotels, one that a user can use to book hotels and rooms online and in general, plan their stays at hotels. The functionalities include booking rooms, checking in and checking out and dropping reviews after styas at various hotels. The main objective of the project was DevOps.
 
 The implementation makes use of the following technologies:
 *	NodeJS, used for the implementation of the backend and the server logic of the web application.
