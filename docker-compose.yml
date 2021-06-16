@@ -1,0 +1,41 @@
+version: "3"
+services:
+  mysql:
+    image: "mysql"
+    environment:
+      # - MYSQL_PASSWORD=mysql_password
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - ./data/db:/var/lib/mysql
+  nginx:
+    depends_on:
+      - api
+      - client
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    ports:
+      - "3050:80"
+  api:
+    build:
+      dockerfile: Dockerfile.dev
+      context: "./server"
+    volumes:
+      - /app/node_modules
+      - ./server:/app
+    environment:
+      - SQLUSER=root
+      - SQLHOST=mysql
+      - SQLDATABASE=hoteldb
+      - SQLPASSWORD=root
+      - SQLPORT=3306
+  client:
+    stdin_open: true
+    build:
+      dockerfile: Dockerfile.dev
+      context: "./client"
+    volumes:
+      - /app/node_modules
+      - ./client:/app
