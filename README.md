@@ -169,19 +169,19 @@ start afresh just issue `rm -rf data`.
 4. Start the `minikube` via `minikube start`.
 
 5. Enable the Ingress controller:
-   5.1. Enable the NGINX Ingress controller using `minikube addons enable ingress`
-   5.2. Verify that the NGINX Ingress controller is running `kubectl get pods -n ingress-nginx`
-   _Add screenshot here_
+   4.1. Enable the NGINX Ingress controller using `minikube addons enable ingress`
+   4.2. Verify that the NGINX Ingress controller is running `kubectl get pods -n ingress-nginx`
+   ![image](https://user-images.githubusercontent.com/59360093/122672096-cdec1480-d197-11eb-971e-7a559c605139.png)
 
 6. Generate an Opqaue Secret to hold password for MySQL database server
-   6.1 Generate an opaque secret using `kubectl create secret generic mysqlpassword --from-literal MYSQLPASSWORD=<your-password>`
-   6.2 Verify that the secret has been generated using `kubectl get secrets`
+   5.1 Generate an opaque secret using `kubectl create secret generic mysqlpassword --from-literal MYSQLPASSWORD=<your-password>`
+   5.2 Verify that the secret has been generated using `kubectl get secrets`
 7. Create all deployments and services using `kubectl apply -f k8s`
 8. Confirm that all pods are up and running using `kubectl get pods`
-   _add screenshot here_
+   ![image](https://user-images.githubusercontent.com/59360093/122672075-b745bd80-d197-11eb-9385-1e5400779222.png)
 9. Get the name (\$POD) of MySQL pod using `kubectl get pod -l component=mysql -o name`
 10. Get the password (\$PASSWORD) for MySQL database server using `kubectl get secrets mysqlpassword -grep MYSQLPASSWORD | grep -v f:s | awk -F '"' '{print$4}' | base64 --decode`
 11. Initialize the database using `kubectl -n default exec -i $POD -- mysql -u root -p$PASSWORD < ~HotelManagementSystem-Docker-K8s/database/init/01.sql`
 12. Get the IP address ($IP-ADDRESS) and port ($PORT) using `kubectl get ingress`
-    _add screenshot here_
+    ![image](https://user-images.githubusercontent.com/59360093/122672116-e3f9d500-d197-11eb-87fa-a940cbe97fc0.png)
 13. After everything is up and running you can start using the app running on port `$IP-ADDRESS:$PORT` in browser of your choice.
