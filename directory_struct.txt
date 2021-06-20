@@ -1,0 +1,63 @@
+.
+├── client
+│   ├── Dockerfile
+│   ├── Dockerfile.dev
+│   ├── nginx
+│   │   └── default.conf
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── public
+│   │   ├── favicon.ico
+│   │   ├── index.html
+│   │   ├── logo192.png
+│   │   ├── logo512.png
+│   │   ├── manifest.json
+│   │   └── robots.txt
+│   └── src
+│       ├── App.css
+│       ├── App.js
+│       ├── App.test.js
+│       ├── Components
+│       │   ├── bookroom.component.js
+│       │   ├── checkin.component.js
+│       │   ├── checkout.component.js
+│       │   ├── landing.component.js
+│       │   ├── login.component.js
+│       │   ├── review.component.js
+│       │   └── signup.component.js
+│       ├── Constants
+│       ├── index.css
+│       ├── index.js
+│       ├── logo.svg
+│       ├── reportWebVitals.js
+│       ├── resort.jpg
+│       └── setupTests.js
+├── database
+│   ├── Dockerfile
+│   └── init
+│       └── 01.sql
+├── deploy.sh
+├── directory_struct.txt
+├── docker-compose.yml
+├── k8s
+│   ├── client-cluster-ip-service.yml
+│   ├── client-deployment.yml
+│   ├── database-persistent-volume-claim.yml
+│   ├── ingress-service.yml
+│   ├── mysql-cluster-ip-service.yml
+│   ├── mysql-deployment.yml
+│   ├── server-cluster-ip-service.yml
+│   └── server-deployment.yml
+├── nginx
+│   ├── default.conf
+│   └── Dockerfile.dev
+├── README.md
+└── server
+    ├── Dockerfile
+    ├── Dockerfile.dev
+    ├── index.js
+    ├── keys.js
+    ├── package.json
+    └── package-lock.json
+
+11 directories, 49 files

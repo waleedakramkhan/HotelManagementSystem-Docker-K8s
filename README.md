@@ -1,15 +1,18 @@
 # HotelManagementSystem-Docker-K8s
+
 The project this repository contains is, in essence, a hotel management system. Tourism is an absolutely booming industry, and we plan to capitalize on that popularity and make the entire accommodation arrangement process of vacations and tours easier. The management system will serve as a database of hotels, one that a user can use to book hotels and rooms online and in general, plan their stays at hotels. The functionalities include booking rooms, checking in and checking out and dropping reviews after styas at various hotels. The main objective of the project was DevOps.
 
 The implementation makes use of the following technologies:
-*	NodeJS, used for the implementation of the backend and the server logic of the web application.
-*	MySQL, as database to store records for the web applications.
-*	Kubernetes, for container orchestration and ensuring high availability and scalability.
-*	Docker, for creating, deploying and running the web application using containers.
-*	Shell, for automating the creation and deployment of the web application.
-*	ReactJS, used for handling the web application’s View layer and UI. 
- 
+
+- NodeJS, used for the implementation of the backend and the server logic of the web application.
+- MySQL, as database to store records for the web applications.
+- Kubernetes, for container orchestration and ensuring high availability and scalability.
+- Docker, for creating, deploying and running the web application using containers.
+- Shell, for automating the creation and deployment of the web application.
+- ReactJS, used for handling the web application’s View layer and UI.
+
 ### The project structure is as donated by the diagrams below:
+
 ![Cloud](https://user-images.githubusercontent.com/85986662/122259218-5f832a00-ceeb-11eb-8350-8826a6b13623.png)
 
 ### The database structure is as donated the ER diagram below;
@@ -25,6 +28,73 @@ The implementation makes use of the following technologies:
 ![297](https://user-images.githubusercontent.com/85986662/122261668-0ec10080-ceee-11eb-95f1-d29c25adb394.PNG)
 
 ![298](https://user-images.githubusercontent.com/85986662/122261685-11235a80-ceee-11eb-8b83-5477ef1be0b2.PNG)
+
+# Directory Structure
+
+Also present in directory_struct.txt
+.
+├── client
+│   ├── Dockerfile
+│   ├── Dockerfile.dev
+│   ├── nginx
+│   │   └── default.conf
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── public
+│   │   ├── favicon.ico
+│   │   ├── index.html
+│   │   ├── logo192.png
+│   │   ├── logo512.png
+│   │   ├── manifest.json
+│   │   └── robots.txt
+│   └── src
+│   ├── App.css
+│   ├── App.js
+│   ├── App.test.js
+│   ├── Components
+│   │   ├── bookroom.component.js
+│   │   ├── checkin.component.js
+│   │   ├── checkout.component.js
+│   │   ├── landing.component.js
+│   │   ├── login.component.js
+│   │   ├── review.component.js
+│   │   └── signup.component.js
+│   ├── Constants
+│   ├── index.css
+│   ├── index.js
+│   ├── logo.svg
+│   ├── reportWebVitals.js
+│   ├── resort.jpg
+│   └── setupTests.js
+├── database
+│   ├── Dockerfile
+│   └── init
+│   └── 01.sql
+├── deploy.sh
+├── directory_struct.txt
+├── docker-compose.yml
+├── k8s
+│   ├── client-cluster-ip-service.yml
+│   ├── client-deployment.yml
+│   ├── database-persistent-volume-claim.yml
+│   ├── ingress-service.yml
+│   ├── mysql-cluster-ip-service.yml
+│   ├── mysql-deployment.yml
+│   ├── server-cluster-ip-service.yml
+│   └── server-deployment.yml
+├── nginx
+│   ├── default.conf
+│   └── Dockerfile.dev
+├── README.md
+└── server
+├── Dockerfile
+├── Dockerfile.dev
+├── index.js
+├── keys.js
+├── package.json
+└── package-lock.json
+
+11 directories, 49 files
 
 # Usage
 
@@ -47,6 +117,7 @@ all you need:
 - Minikube: https://kubernetes.io/docs/tasks/tools/install-minikube/
 
 ## Usage with Docker
+
 Once `docker` and `docker-compose` are installed run `docker-compose up --build`.
 
 This will trigger the pulling and building of the necessary images and
@@ -66,37 +137,45 @@ start afresh just issue `rm -rf data`.
 
 ## Usage with Minikube + Kubernetes
 
+### Optional Steps. Images have already been push to waleedakramkhann's public repo on docker hub.
+
 1. Create an image for `client` and push it to dockerhub:
    1.1. Move to `client` directory `cd client/`
-   1.2. Build the image with Dockerfile `docker build -t <hub-user>/hotelclient .` 
-      Note that we are inside `client` directory. `<hub-user>/hotelclient` would be name of our image
+   1.2. Build the image with Dockerfile `docker build -t <hub-user>/hotelclient .`
+   Note that we are inside `client` directory. `<hub-user>/hotelclient` would be name of our image
    1.3. You can check your newly built image using `docker images`
    1.4. Push the images to Dockerhub `docker push <hub-user>/hotelclient`
-   
-2. Create an image for `server` and push it to dockerhub: 
+2. Create an image for `server` and push it to dockerhub:
    2.1. Move to `server` directory `cd server/`
-   2.2. Build the image with Dockerfile `docker build -t <hub-user>/hotelserver .` 
-      Note that we are inside `client` directory. `<hub-user>/hotelserver` would be name of our image
+   2.2. Build the image with Dockerfile `docker build -t <hub-user>/hotelserver .`
+   Note that we are inside `server` directory. `<hub-user>/hotelserver` would be name of our image
    2.3. You can check your newly built image using `docker images`
    2.4. Push the images to Dockerhub `docker push <hub-user>/hotelserver`
+3. Create an image for `database` and push it to dockerhub:
+   2.1. Move to `database` directory `cd database/`
+   2.2. Build the image with Dockerfile `docker build -t <hub-user>/hoteldb .`
+   Note that we are inside `database` directory. `<hub-user>/hoteldb` would be name of our image
+   2.3. You can check your newly built image using `docker images`
+   2.4. Push the images to Dockerhub `docker push <hub-user>/hoteldb`
 
-3. Start the `minikube` via `minikube start`. 
+### You can either follow these steps or run bash deploy.sh
+
+3. Start the `minikube` via `minikube start`.
 
 4. Enable the Ingress controller:
    4.1. Enable the NGINX Ingress controller using `minikube addons enable ingress`
    4.2. Verify that the NGINX Ingress controller is running `kubectl get pods -n ingress-nginx`
-      *Add screenshot here*
+   _Add screenshot here_
 
 5. Generate an Opqaue Secret to hold password for MySQL database server
    5.1 Generate an opaque secret using `kubectl create secret generic mysqlpassword --from-literal MYSQLPASSWORD=<your-password>`
    5.2 Verify that the secret has been generated using `kubectl get secrets`
-   
 6. Create all deployments and services using `kubectl apply -f k8s`
 7. Confirm that all pods are up and running using `kubectl get pods`
-   *add screenshot here*
-8. Get the name ($POD) of MySQL pod using `kubectl get pod -l component=mysql -o name`
-9. Get the password ($PASSWORD) for MySQL database server using `kubectl get secrets mysqlpassword -grep MYSQLPASSWORD | grep -v f:s | awk -F '"' '{print$4}' | base64 --decode`
-10. Initialize the database using `kubectl -n default exec -i $POD -- mysql -u root -p$PASSWORD < ~HotelManagementSystem-Docker-K8s/init/01.sql`
+   _add screenshot here_
+8. Get the name (\$POD) of MySQL pod using `kubectl get pod -l component=mysql -o name`
+9. Get the password (\$PASSWORD) for MySQL database server using `kubectl get secrets mysqlpassword -grep MYSQLPASSWORD | grep -v f:s | awk -F '"' '{print$4}' | base64 --decode`
+10. Initialize the database using `kubectl -n default exec -i $POD -- mysql -u root -p$PASSWORD < ~HotelManagementSystem-Docker-K8s/database/init/01.sql`
 11. Get the IP address ($IP-ADDRESS) and port ($PORT) using `kubectl get ingress`
-    *add screenshot here*
+    _add screenshot here_
 12. After everything is up and running you can start using the app running on port `$IP-ADDRESS:$PORT` in browser of your choice.

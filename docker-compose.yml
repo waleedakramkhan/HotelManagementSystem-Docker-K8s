@@ -6,7 +6,7 @@ services:
       # - MYSQL_PASSWORD=mysql_password
       - MYSQL_ROOT_PASSWORD=root
     volumes:
-      - ./init:/docker-entrypoint-initdb.d
+      - ./database/init:/docker-entrypoint-initdb.d
       - ./data/db:/var/lib/mysql
   nginx:
     depends_on:
