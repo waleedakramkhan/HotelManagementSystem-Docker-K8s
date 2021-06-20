@@ -137,7 +137,7 @@ start afresh just issue `rm -rf data`.
 
 ## Usage with Minikube + Kubernetes
 
-### Optional Steps. Images have already been push to waleedakramkhann's public repo on docker hub.
+### (OPTIONAL STEP; images have already been pushed to the docker hub public repository https://hub.docker.com/repository/docker/waleedakramkhann/hotelclient)
 
 1. Create an image for `client` and push it to dockerhub:
    1.1. Move to `client` directory `cd client/`
@@ -145,12 +145,18 @@ start afresh just issue `rm -rf data`.
    Note that we are inside `client` directory. `<hub-user>/hotelclient` would be name of our image
    1.3. You can check your newly built image using `docker images`
    1.4. Push the images to Dockerhub `docker push <hub-user>/hotelclient`
+
+### (OPTIONAL STEP; images have already been pushed to the docker hub public repository https://hub.docker.com/repository/docker/waleedakramkhann/hotelserver)
+
 2. Create an image for `server` and push it to dockerhub:
    2.1. Move to `server` directory `cd server/`
    2.2. Build the image with Dockerfile `docker build -t <hub-user>/hotelserver .`
    Note that we are inside `server` directory. `<hub-user>/hotelserver` would be name of our image
    2.3. You can check your newly built image using `docker images`
    2.4. Push the images to Dockerhub `docker push <hub-user>/hotelserver`
+
+### (OPTIONAL STEP; images have already been pushed to the docker hub public repository https://hub.docker.com/repository/docker/waleedakramkhann/hoteldb)
+
 3. Create an image for `database` and push it to dockerhub:
    2.1. Move to `database` directory `cd database/`
    2.2. Build the image with Dockerfile `docker build -t <hub-user>/hoteldb .`
@@ -160,22 +166,22 @@ start afresh just issue `rm -rf data`.
 
 ### You can either follow these steps or run bash deploy.sh
 
-3. Start the `minikube` via `minikube start`.
+4. Start the `minikube` via `minikube start`.
 
-4. Enable the Ingress controller:
-   4.1. Enable the NGINX Ingress controller using `minikube addons enable ingress`
-   4.2. Verify that the NGINX Ingress controller is running `kubectl get pods -n ingress-nginx`
+5. Enable the Ingress controller:
+   5.1. Enable the NGINX Ingress controller using `minikube addons enable ingress`
+   5.2. Verify that the NGINX Ingress controller is running `kubectl get pods -n ingress-nginx`
    _Add screenshot here_
 
-5. Generate an Opqaue Secret to hold password for MySQL database server
-   5.1 Generate an opaque secret using `kubectl create secret generic mysqlpassword --from-literal MYSQLPASSWORD=<your-password>`
-   5.2 Verify that the secret has been generated using `kubectl get secrets`
-6. Create all deployments and services using `kubectl apply -f k8s`
-7. Confirm that all pods are up and running using `kubectl get pods`
+6. Generate an Opqaue Secret to hold password for MySQL database server
+   6.1 Generate an opaque secret using `kubectl create secret generic mysqlpassword --from-literal MYSQLPASSWORD=<your-password>`
+   6.2 Verify that the secret has been generated using `kubectl get secrets`
+7. Create all deployments and services using `kubectl apply -f k8s`
+8. Confirm that all pods are up and running using `kubectl get pods`
    _add screenshot here_
-8. Get the name (\$POD) of MySQL pod using `kubectl get pod -l component=mysql -o name`
-9. Get the password (\$PASSWORD) for MySQL database server using `kubectl get secrets mysqlpassword -grep MYSQLPASSWORD | grep -v f:s | awk -F '"' '{print$4}' | base64 --decode`
-10. Initialize the database using `kubectl -n default exec -i $POD -- mysql -u root -p$PASSWORD < ~HotelManagementSystem-Docker-K8s/database/init/01.sql`
-11. Get the IP address ($IP-ADDRESS) and port ($PORT) using `kubectl get ingress`
+9. Get the name (\$POD) of MySQL pod using `kubectl get pod -l component=mysql -o name`
+10. Get the password (\$PASSWORD) for MySQL database server using `kubectl get secrets mysqlpassword -grep MYSQLPASSWORD | grep -v f:s | awk -F '"' '{print$4}' | base64 --decode`
+11. Initialize the database using `kubectl -n default exec -i $POD -- mysql -u root -p$PASSWORD < ~HotelManagementSystem-Docker-K8s/database/init/01.sql`
+12. Get the IP address ($IP-ADDRESS) and port ($PORT) using `kubectl get ingress`
     _add screenshot here_
-12. After everything is up and running you can start using the app running on port `$IP-ADDRESS:$PORT` in browser of your choice.
+13. After everything is up and running you can start using the app running on port `$IP-ADDRESS:$PORT` in browser of your choice.
